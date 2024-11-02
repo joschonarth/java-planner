@@ -4,6 +4,7 @@ import com.joschonarth.planner.activity.ActivityData;
 import com.joschonarth.planner.activity.ActivityRequestPayload;
 import com.joschonarth.planner.activity.ActivityResponse;
 import com.joschonarth.planner.activity.ActivityService;
+import com.joschonarth.planner.link.LinkData;
 import com.joschonarth.planner.link.LinkRequestPayload;
 import com.joschonarth.planner.link.LinkResponse;
 import com.joschonarth.planner.link.LinkService;
@@ -128,7 +129,7 @@ public class TripController {
 
     @GetMapping("/{id}/activities")
     public ResponseEntity<List<ActivityData>> getAllActivities(@PathVariable UUID id) {
-        List<ActivityData> activityDataList = this.activityService.getAllActivitiesFromId(id);
+        List<ActivityData> activityDataList = this.activityService.getAllActivitiesFromTrip(id);
 
         return ResponseEntity.ok(activityDataList);
     }
@@ -145,5 +146,12 @@ public class TripController {
             return ResponseEntity.ok(linkResponse);
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/{id}/links")
+    public ResponseEntity<List<LinkData>> getAllLinks(@PathVariable UUID id) {
+        List<LinkData> linkDataList = this.linkService.getAllLinksFromTrip(id);
+
+        return ResponseEntity.ok(linkDataList);
     }
 }
