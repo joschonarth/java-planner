@@ -4,6 +4,9 @@ import com.joschonarth.planner.activity.ActivityData;
 import com.joschonarth.planner.activity.ActivityRequestPayload;
 import com.joschonarth.planner.activity.ActivityResponse;
 import com.joschonarth.planner.activity.ActivityService;
+import com.joschonarth.planner.link.LinkRequestPayload;
+import com.joschonarth.planner.link.LinkResponse;
+import com.joschonarth.planner.link.LinkService;
 import com.joschonarth.planner.participant.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +30,9 @@ public class TripController {
 
     @Autowired
     private ActivityService activityService;
+    
+    @Autowired
+    private LinkService linkService;
 
     @PostMapping
     public ResponseEntity<TripCreateResponse> createTrip(@RequestBody TripRequestPayload payload) {
@@ -125,5 +131,19 @@ public class TripController {
         List<ActivityData> activityDataList = this.activityService.getAllActivitiesFromId(id);
 
         return ResponseEntity.ok(activityDataList);
+    }
+
+    @PostMapping("/{id}/links")
+    public ResponseEntity<LinkResponse> registerLink(@PathVariable UUID id, @RequestBody LinkRequestPayload payload) {
+        Optional<Trip> trip = this.repository.findById(id);
+
+        if (trip.isPresent()) {
+            Trip rawTrip = trip.get();
+
+            LinkResponse linkResponse = this.linkService.registerLink(payload, rawTrip);
+
+            return ResponseEntity.ok(linkResponse);
+        }
+        return ResponseEntity.notFound().build();
     }
 }
