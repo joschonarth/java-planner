@@ -1,4 +1,4 @@
-package com.joschonarth.planner.activities;
+package com.joschonarth.planner.activity;
 
 import com.joschonarth.planner.trip.Trip;
 import jakarta.persistence.*;

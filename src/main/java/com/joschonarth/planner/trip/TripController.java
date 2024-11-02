@@ -1,9 +1,9 @@
 package com.joschonarth.planner.trip;
 
-import com.joschonarth.planner.activities.ActivityData;
-import com.joschonarth.planner.activities.ActivityRequestPayload;
-import com.joschonarth.planner.activities.ActivityResponse;
-import com.joschonarth.planner.activities.ActivityService;
+import com.joschonarth.planner.activity.ActivityData;
+import com.joschonarth.planner.activity.ActivityRequestPayload;
+import com.joschonarth.planner.activity.ActivityResponse;
+import com.joschonarth.planner.activity.ActivityService;
 import com.joschonarth.planner.participant.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
