@@ -1,5 +1,6 @@
 package com.joschonarth.planner.trip;
 
+import com.joschonarth.planner.activities.ActivityData;
 import com.joschonarth.planner.activities.ActivityRequestPayload;
 import com.joschonarth.planner.activities.ActivityResponse;
 import com.joschonarth.planner.activities.ActivityService;
@@ -118,5 +119,12 @@ public class TripController {
             return ResponseEntity.ok(activityResponse);
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/{id}/activities")
+    public ResponseEntity<List<ActivityData>> getAllActivities(@PathVariable UUID id) {
+        List<ActivityData> activityDataList = this.activityService.getAllActivitiesFromId(id);
+
+        return ResponseEntity.ok(activityDataList);
     }
 }
