@@ -1,4 +1,4 @@
-# ✈️🌍 Plann.er - API de Gerenciamento de Viagens
+# ✈️ Plann.er - API de Gerenciamento de Viagens 🌍
 
 API desenvolvida em Java com o framework Spring Boot para gerenciar viagens, atividades e participantes de maneira prática e organizada. A API permite o controle completo de informações sobre viagens e oferece endpoints para criar, atualizar, verificar e listar dados de viagens, atividades, participantes e links.
 
