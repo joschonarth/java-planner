@@ -1,5 +1,6 @@
 package com.joschonarth.planner.trip;
 
+import com.joschonarth.planner.exception.InvalidDateException;
 import com.joschonarth.planner.participant.ParticipantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,11 @@ public class TripService {
     private ParticipantService participantService;
 
     public TripCreateResponse createTrip(TripRequestPayload payload) {
+        LocalDateTime startsAt = LocalDateTime.parse(payload.starts_at(), DateTimeFormatter.ISO_DATE_TIME);
+        LocalDateTime endsAt = LocalDateTime.parse(payload.ends_at(), DateTimeFormatter.ISO_DATE_TIME);
+
+        validateDates(startsAt, endsAt);
+
         Trip newTrip = new Trip(payload);
         tripRepository.save(newTrip);
 
@@ -34,9 +40,14 @@ public class TripService {
         Optional<Trip> trip = tripRepository.findById(id);
 
         if (trip.isPresent()) {
+            LocalDateTime startsAt = LocalDateTime.parse(payload.starts_at(), DateTimeFormatter.ISO_DATE_TIME);
+            LocalDateTime endsAt = LocalDateTime.parse(payload.ends_at(), DateTimeFormatter.ISO_DATE_TIME);
+
+            validateDates(startsAt, endsAt);
+
             Trip rawTrip = trip.get();
-            rawTrip.setEndsAt(LocalDateTime.parse(payload.ends_at(), DateTimeFormatter.ISO_DATE_TIME));
-            rawTrip.setStartsAt(LocalDateTime.parse(payload.starts_at(), DateTimeFormatter.ISO_DATE_TIME));
+            rawTrip.setEndsAt(endsAt);
+            rawTrip.setStartsAt(startsAt);
             rawTrip.setDestination(payload.destination());
 
             tripRepository.save(rawTrip);
@@ -57,6 +68,12 @@ public class TripService {
             return Optional.of(rawTrip);
         }
         return Optional.empty();
+    }
+
+    private void validateDates(LocalDateTime startsAt, LocalDateTime endsAt) {
+        if (startsAt.isAfter(endsAt)) {
+            throw new InvalidDateException("The start date must be earlier than the end date.");
+        }
     }
 }
 
