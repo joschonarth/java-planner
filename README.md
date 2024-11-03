@@ -37,6 +37,7 @@ API desenvolvida em Java com o framework Spring Boot para gerenciar viagens, ati
 
 ```bash
 git clone https://github.com/joschonarth/java-planner
+```
 
 📌 **2. Entre no diretório do projeto**:
 
