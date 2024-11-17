@@ -4,7 +4,7 @@ API desenvolvida em Java com o framework Spring Boot para gerenciar viagens, ati
 
 ## ⚙️ Funcionalidades
 
-- ✏️ **Criar Viagem**: Endpoint para criar uma nova viagem com informações básicas.
+- ✏️ **Criar Viagem**: Cria uma nova viagem com as principais informações.
 - 🔍 **Verificar Viagem**: Permite consultar os detalhes de uma viagem específica.
 - 🔄 **Atualizar Viagem**: Atualiza as informações de uma viagem já existente.
 - ✅ **Confirmar Viagem**: Confirma a realização de uma viagem.
